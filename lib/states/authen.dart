@@ -18,15 +18,34 @@ class Authen extends StatelessWidget {
             children: [
               newLogo(boxConstraints),
               newTitle(),
-              Container(margin: const EdgeInsets.only(top: 16),
-                width: boxConstraints.maxWidth * 0.6,
+              formUser(boxConstraints),
+              Container(
+                margin: const EdgeInsets.only(top: 16),
                 height: 40,
-                child: ShowForm(),
+                width: boxConstraints.maxWidth*0.6,
+                child: ShowForm(
+                  hint: 'Password',
+                  iconData: Icons.lock_open_outlined,
+                  changeFung: (String string) {},
+                ),
               ),
             ],
           ),
         );
       }),
+    );
+  }
+
+  Container formUser(BoxConstraints boxConstraints) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      width: boxConstraints.maxWidth * 0.6,
+      height: 40,
+      child: ShowForm(
+        hint: 'User :',
+        iconData: Icons.account_circle_outlined,
+        changeFung: (String string) {},
+      ),
     );
   }
 
