@@ -1,5 +1,8 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:notegooner/utility/my_constant.dart';
+import 'package:notegooner/utility/my_dialog.dart';
 import 'package:notegooner/widgets/show_button.dart';
 import 'package:notegooner/widgets/show_form.dart';
 import 'package:notegooner/widgets/show_image.dart';
@@ -57,6 +60,8 @@ class _AuthenState extends State<Authen> {
 
           if ((user?.isEmpty ?? true) || (password?.isEmpty ?? true)) {
             print('Have Space');
+            MyDialog(context: context).normalDialog(
+                title: "Have Space", subtitle: 'Please Fill Blanck');
           } else {
             print('No Space');
           }
