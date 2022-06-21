@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notegooner/utility/my_constant.dart';
+import 'package:notegooner/widgets/show_button.dart';
 import 'package:notegooner/widgets/show_form.dart';
 import 'package:notegooner/widgets/show_image.dart';
 import 'package:notegooner/widgets/show_text.dart';
@@ -13,29 +14,54 @@ class Authen extends StatefulWidget {
 
 class _AuthenState extends State<Authen> {
   bool redEye = true;
+  String? user, password;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints boxConstraints) {
-        return GestureDetector(behavior: HitTestBehavior.opaque,
+        return GestureDetector(
+          behavior: HitTestBehavior.opaque,
           onTap: () {
             FocusScope.of(context).requestFocus(FocusScopeNode());
           },
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                newLogo(boxConstraints),
-                newTitle(),
-                formUser(boxConstraints),
-                formPassword(boxConstraints),
-              ],
+          child: Container(
+            decoration: MyConstant().bgBox(),
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  newLogo(boxConstraints),
+                  newTitle(boxConstraints),
+                  formUser(boxConstraints),
+                  formPassword(boxConstraints),
+                  buttonLogin(boxConstraints),
+                ],
+              ),
             ),
           ),
         );
       }),
+    );
+  }
+
+  Container buttonLogin(BoxConstraints boxConstraints) {
+    return Container(
+      margin: const EdgeInsets.only(top: 16),
+      width: boxConstraints.maxWidth * 0.4,
+      child: ShowButtom(
+        label: 'Login',
+        pressFunc: () {
+          print('user= $user, password = $password');
+
+          if ((user?.isEmpty ?? true) || (password?.isEmpty ?? true)) {
+            print('Have Space');
+          } else {
+            print('No Space');
+          }
+        },
+      ),
     );
   }
 
@@ -53,7 +79,9 @@ class _AuthenState extends State<Authen> {
         obSecu: redEye,
         hint: 'Password :',
         iconData: Icons.lock_open_outlined,
-        changeFung: (String string) {},
+        changeFung: (String string) {
+          password = string.trim();
+        },
       ),
     );
   }
@@ -66,22 +94,38 @@ class _AuthenState extends State<Authen> {
       child: ShowForm(
         hint: 'User :',
         iconData: Icons.account_circle_outlined,
-        changeFung: (String string) {},
+        changeFung: (String string) {
+          user = string.trim();
+        },
       ),
     );
   }
 
-  ShowText newTitle() {
-    return ShowText(
-      text: 'Login :',
-      textStyle: MyConstant().h1Style(),
+  SizedBox newTitle(BoxConstraints boxConstraints) {
+    return SizedBox(
+      width: boxConstraints.maxWidth * 0.6,
+      child: Row(
+        children: [
+          ShowText(
+            text: 'Login :',
+            textStyle: MyConstant().h1Style(),
+          ),
+        ],
+      ),
     );
   }
 
   SizedBox newLogo(BoxConstraints boxConstraints) {
     return SizedBox(
-      width: boxConstraints.maxWidth * 0.25,
-      child: ShowImage(),
+      width: boxConstraints.maxWidth * 0.6,
+      child: Row(
+        children: [
+          SizedBox(
+            width: boxConstraints.maxWidth * 0.25,
+            child: ShowImage(),
+          ),
+        ],
+      ),
     );
   }
 }

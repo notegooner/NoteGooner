@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:notegooner/utility/my_constant.dart';
 
 class ShowForm extends StatelessWidget {
   final String hint;
@@ -22,11 +23,13 @@ class ShowForm extends StatelessWidget {
       obscureText: obSecu ?? false,
       onChanged: changeFung,
       decoration: InputDecoration(
-        suffixIcon: redEyeFunc == null 
+        filled: true,
+        fillColor: Color.fromARGB(255, 255, 252, 225).withOpacity(0.7),
+        suffixIcon: redEyeFunc == null
             ? Icon(iconData)
             : IconButton(
-              onPressed: redEyeFunc, 
-              icon: Icon(Icons.remove_red_eye),
+                onPressed: redEyeFunc,
+                icon: Icon(Icons.remove_red_eye),
               ),
         hintText: hint,
         contentPadding: const EdgeInsets.only(
@@ -35,9 +38,11 @@ class ShowForm extends StatelessWidget {
           left: 16,
         ),
         enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyConstant.dark),
           borderRadius: BorderRadius.circular(20),
         ),
         focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: MyConstant.active),
           borderRadius: BorderRadius.circular(20),
         ),
       ),
