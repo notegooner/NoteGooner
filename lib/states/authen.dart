@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:notegooner/utility/my_constant.dart';
+import 'package:notegooner/widgets/show_form.dart';
 import 'package:notegooner/widgets/show_image.dart';
 import 'package:notegooner/widgets/show_text.dart';
 
@@ -16,14 +17,23 @@ class Authen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               newLogo(boxConstraints),
-              ShowText(
-                text: 'Login :',
-                textStyle: MyConstant().h1Style(),
+              newTitle(),
+              Container(margin: const EdgeInsets.only(top: 16),
+                width: boxConstraints.maxWidth * 0.6,
+                height: 40,
+                child: ShowForm(),
               ),
             ],
           ),
         );
       }),
+    );
+  }
+
+  ShowText newTitle() {
+    return ShowText(
+      text: 'Login :',
+      textStyle: MyConstant().h1Style(),
     );
   }
 
