@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:notegooner/models/user_model.dart';
+import 'package:notegooner/states/my_service.dart';
 import 'package:notegooner/utility/my_constant.dart';
 import 'package:notegooner/utility/my_dialog.dart';
 import 'package:notegooner/widgets/show_button.dart';
@@ -156,7 +157,14 @@ class _AuthenState extends State<Authen> {
           UserModel userModel = UserModel.fromMap(element);
           if (password == userModel.password) {
             MyDialog(context: context).normalDialog(
-                pressFunc: () {},
+                pressFunc: () {
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyService(),
+                      ),
+                      (route) => false);
+                },
                 label: 'Go to Service',
                 title: 'Welcome to App',
                 subtitle: 'Login Success Welcome ${userModel.name}');
