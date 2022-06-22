@@ -17,7 +17,7 @@ class MyService extends StatelessWidget {
         backgroundColor: Colors.white,
         actions: [
           ShowIconButton(
-            iconData: Icons.exit_to_app,
+            iconData: Icons.logout_outlined,
             pressFunc: () {
               MyDialog(context: context).normalDialog(
                   pressFunc: () async {
@@ -29,7 +29,7 @@ class MyService extends StatelessWidget {
                     });
                   },
                   label: 'SignOut',
-                  title: 'Sign Out',
+                  title: 'Sign Out ?',
                   subtitle: 'Please Confirm Signout');
             },
           )
