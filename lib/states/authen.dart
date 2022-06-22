@@ -1,6 +1,10 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:notegooner/models/user_model.dart';
 import 'package:notegooner/utility/my_constant.dart';
 import 'package:notegooner/utility/my_dialog.dart';
 import 'package:notegooner/widgets/show_button.dart';
@@ -134,6 +138,34 @@ class _AuthenState extends State<Authen> {
       ),
     );
   }
-  
-  void processChecklogin() {}
+
+  Future<void> processChecklogin() async {
+    String path =
+        'https://www.androidthai.in.th/egat/getUserWhereUserNote.php?isAdd=true&user=$user';
+
+    await Dio().get(path).then((value) {
+      print('value ==> $value');
+
+      if (value.toString() == 'null') {
+        MyDialog(context: context).normalDialog(
+            title: 'User False', subtitle: 'No $user in my Database');
+      } else {
+        var result = json.decode(value.data);
+        print('result ==> $result');
+        for (var element in result) {
+          UserModel userModel = UserModel.fromMap(element);
+          if (password == userModel.password) {
+            MyDialog(context: context).normalDialog(
+                pressFunc: () {},
+                label: 'Go to Service',
+                title: 'Welcome to App',
+                subtitle: 'Login Success Welcome ${userModel.name}');
+          } else {
+            MyDialog(context: context).normalDialog(
+                title: 'Password False', subtitle: 'Please Try Again');
+          }
+        }
+      }
+    });
+  }
 }
