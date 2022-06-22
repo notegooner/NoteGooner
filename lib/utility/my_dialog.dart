@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notegooner/utility/my_constant.dart';
 import 'package:notegooner/widgets/show_image.dart';
 import 'package:notegooner/widgets/show_text.dart';
+import 'package:notegooner/widgets/show_text_button.dart';
 
 class MyDialog {
   final BuildContext context;
@@ -27,6 +28,13 @@ class MyDialog {
           ),
           subtitle: ShowText(text: subtitle),
         ),
+        actions: [
+          ShowTextButton(
+              label: 'OK',
+              pressFunc: () {
+                Navigator.pop(context);
+              })
+        ],
       ),
     );
   }

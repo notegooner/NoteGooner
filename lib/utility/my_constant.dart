@@ -5,7 +5,7 @@ class MyConstant {
   // Field
   static Color primary = Color.fromARGB(255, 65, 163, 255);
   static Color dark = Color.fromARGB(255, 199, 179, 0);
-  static Color active = Color.fromARGB(255, 255, 196, 18);
+  static Color active = Color.fromARGB(255, 3, 221, 17);
 
   // Method
 
@@ -42,6 +42,15 @@ class MyConstant {
       textStyle: TextStyle(
       fontSize: 14,
       color: dark,
+      fontWeight: FontWeight.normal,
+    ));
+  }
+
+  TextStyle h3ActiveStyle() {
+    return GoogleFonts.mali(
+      textStyle: TextStyle(
+      fontSize: 14,
+      color: active,
       fontWeight: FontWeight.normal,
     ));
   }
