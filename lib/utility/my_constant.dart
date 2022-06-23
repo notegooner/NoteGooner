@@ -6,7 +6,8 @@ class MyConstant {
   static Color primary = Color.fromARGB(255, 65, 163, 255);
   static Color dark = Color.fromARGB(255, 199, 179, 0);
   static Color active = Color.fromARGB(255, 3, 221, 17);
-  static Color grey = Color.fromARGB(255, 128, 128, 128);
+  static Color grey = Color.fromARGB(255, 130, 129, 129);
+  static Color blue = Color.fromARGB(255, 0, 117, 159);
 
   // Method
 
@@ -48,10 +49,19 @@ class MyConstant {
   }
 
   TextStyle h4Style() {
-    return GoogleFonts.mali(
+    return GoogleFonts.ibmPlexSans(
+      textStyle: TextStyle(
+      fontSize: 16,
+      color: grey,
+      fontWeight: FontWeight.normal,
+    ));
+  }
+
+  TextStyle h5Style() {
+    return GoogleFonts.ibmPlexSans(
       textStyle: TextStyle(
       fontSize: 14,
-      color: grey,
+      color: blue,
       fontWeight: FontWeight.normal,
     ));
   }
