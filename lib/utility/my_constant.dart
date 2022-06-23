@@ -5,7 +5,7 @@ class MyConstant {
   // Field
   static Color primary = Color.fromARGB(255, 65, 163, 255);
   static Color dark = Color.fromARGB(255, 199, 179, 0);
-  static Color active = Color.fromARGB(255, 3, 221, 17);
+  static Color active = Color.fromARGB(255, 10, 172, 21);
   static Color grey = Color.fromARGB(255, 130, 129, 129);
   static Color blue = Color.fromARGB(255, 0, 117, 159);
 

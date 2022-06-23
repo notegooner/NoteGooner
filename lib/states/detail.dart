@@ -1,8 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import 'package:notegooner/models/job_model.dart';
 import 'package:notegooner/utility/my_constant.dart';
+import 'package:notegooner/utility/my_dialog.dart';
+import 'package:notegooner/widgets/show_icon_button.dart';
 import 'package:notegooner/widgets/show_image.dart';
 import 'package:notegooner/widgets/show_text.dart';
 
@@ -19,11 +24,25 @@ class Detail extends StatefulWidget {
 
 class _DetailState extends State<Detail> {
   JobModel? jobModel;
+  File? file;
 
   @override
   void initState() {
     super.initState();
     jobModel = widget.jobModel;
+  }
+
+  Future<void> processTakePhoto({required ImageSource imageSource}) async {
+    var result = await ImagePicker().pickImage(
+      source: imageSource,
+      maxWidth: 800,
+      maxHeight: 800,
+    );
+
+    if (result != null) {
+      file = File(result.path);
+      setState(() {});
+    }
   }
 
   @override
@@ -39,7 +58,56 @@ class _DetailState extends State<Detail> {
         backgroundColor: Colors.white,
         foregroundColor: MyConstant.grey,
       ),
-      body: ShowImage(path: 'images/image.png',),
+      body: LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints boxConstraints) {
+        return Center(
+          child: Column(
+            children: [
+              newImage(boxConstraints),
+            ],
+          ),
+        );
+      }),
     );
+  }
+
+  Container newImage(BoxConstraints boxConstraints) {
+    return Container(
+        margin: const EdgeInsets.only(top: 36, bottom: 16),
+        width: boxConstraints.maxWidth * 0.6,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: file == null
+                  ? const ShowImage(
+                      path: 'images/image.png',
+                    )
+                  : Image.file(file!),
+            ),
+            Positioned(
+              right: 0,
+              bottom: 0,
+              child: ShowIconButton(
+                iconData: Icons.add_a_photo_outlined,
+                pressFunc: () {
+                  MyDialog(context: context).normalDialog(
+                      label: 'Camera',
+                      label2: 'Galery',
+                      pressFunc: () {
+                        processTakePhoto(imageSource: ImageSource.camera);
+                        Navigator.pop(context);
+                      },
+                      pressFunc2: () {
+                        processTakePhoto(imageSource: ImageSource.gallery);
+                        Navigator.pop(context);
+                      },
+                      title: 'Source Image',
+                      subtitle: 'Please Tab Camera or Gallery');
+                },
+              ),
+            ),
+          ],
+        ));
   }
 }
