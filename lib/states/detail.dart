@@ -60,54 +60,74 @@ class _DetailState extends State<Detail> {
       ),
       body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints boxConstraints) {
-        return Center(
-          child: Column(
-            children: [
-              newImage(boxConstraints),
-            ],
-          ),
+        return ListView(
+          children: [
+            newImage(boxConstraints),
+            newDetail(boxConstraints),
+          ],
         );
       }),
     );
   }
 
-  Container newImage(BoxConstraints boxConstraints) {
-    return Container(
-        margin: const EdgeInsets.only(top: 36, bottom: 16),
-        width: boxConstraints.maxWidth * 0.6,
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: file == null
-                  ? const ShowImage(
-                      path: 'images/image.png',
-                    )
-                  : Image.file(file!),
-            ),
-            Positioned(
-              right: 0,
-              bottom: 0,
-              child: ShowIconButton(
-                iconData: Icons.add_a_photo_outlined,
-                pressFunc: () {
-                  MyDialog(context: context).normalDialog(
-                      label: 'Camera',
-                      label2: 'Galery',
-                      pressFunc: () {
-                        processTakePhoto(imageSource: ImageSource.camera);
-                        Navigator.pop(context);
-                      },
-                      pressFunc2: () {
-                        processTakePhoto(imageSource: ImageSource.gallery);
-                        Navigator.pop(context);
-                      },
-                      title: 'Source Image',
-                      subtitle: 'Please Tab Camera or Gallery');
-                },
-              ),
-            ),
-          ],
-        ));
+  Row newDetail(BoxConstraints boxConstraints) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          margin: const EdgeInsets.symmetric(vertical: 16),
+          width: boxConstraints.maxWidth * 0.8,
+          child: ShowText(
+            text: jobModel!.detail,
+            textStyle: MyConstant().h4Style(),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row newImage(BoxConstraints boxConstraints) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+            margin: const EdgeInsets.only(top: 36, bottom: 16),
+            width: boxConstraints.maxWidth * 0.6,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: file == null
+                      ? const ShowImage(
+                          path: 'images/image.png',
+                        )
+                      : Image.file(file!),
+                ),
+                Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: ShowIconButton(
+                    iconData: Icons.add_a_photo_outlined,
+                    pressFunc: () {
+                      MyDialog(context: context).normalDialog(
+                          label: 'Camera',
+                          label2: 'Galery',
+                          pressFunc: () {
+                            processTakePhoto(imageSource: ImageSource.camera);
+                            Navigator.pop(context);
+                          },
+                          pressFunc2: () {
+                            processTakePhoto(imageSource: ImageSource.gallery);
+                            Navigator.pop(context);
+                          },
+                          title: 'Source Image',
+                          subtitle: 'Please Tab Camera or Gallery');
+                    },
+                  ),
+                ),
+              ],
+            )),
+      ],
+    );
   }
 }
