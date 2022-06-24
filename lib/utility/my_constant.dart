@@ -66,6 +66,15 @@ class MyConstant {
     ));
   }
 
+  TextStyle h6Style() {
+    return GoogleFonts.mali(
+      textStyle: TextStyle(
+      fontSize: 18,
+      color: grey,
+      fontWeight: FontWeight.w700,
+    ));
+  }
+
   TextStyle h3ActiveStyle() {
     return GoogleFonts.mali(
       textStyle: TextStyle(

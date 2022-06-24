@@ -80,7 +80,7 @@ class _MyServiceState extends State<MyService> {
       centerTitle: true,
       title: ShowText(
         text: titles[indexbodys],
-        textStyle: MyConstant().h4Style(),
+        textStyle: MyConstant().h6Style(),
       ),
       elevation: 0,
       foregroundColor: MyConstant.grey,
